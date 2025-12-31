@@ -1,5 +1,19 @@
 {
-  "name": "before-storybook",
+  "name": "mario",
+  "description": "A React component library built with TypeScript, Vite, Storybook, and Tailwind CSS.",
+  "license": "UNLICENSED",
+  "maintainers": [
+    {
+      "name": "Atul"
+    }
+  ],
+  "author": {
+    "name": "Atul"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/en-atul/mario.git"
+  },
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +24,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test-storybook": "vitest --project=storybook"
+    "test-storybook": "vitest --project=storybook",
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
