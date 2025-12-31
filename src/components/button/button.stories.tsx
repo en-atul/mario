@@ -29,8 +29,12 @@ const meta = {
     },
     variant: {
       control: 'select',
+      options: ['primary', 'secondary', 'destructive'],
     },
   },
+  parameters: {
+    layout: 'centered',
+  }
 } satisfies Meta;
 
 export default meta;
