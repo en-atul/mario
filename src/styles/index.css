@@ -1,0 +1,12 @@
+@import '@fontsource-variable/inter';
+
+@import "tailwindcss";
+@import "./colors.css";
+
+/* Configure dark mode to work with data-mode attribute */
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+
+body {
+  @apply dark:bg-slate-950 dark:text-white;
+}
+
