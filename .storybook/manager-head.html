@@ -1,0 +1,23 @@
+<style>
+  /* Improve visibility of plus button icon */
+  button[aria-label*="Add"] svg,
+  button[aria-label*="Create"] svg,
+  [data-testid*="add"] svg,
+  .os-icon-plus svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    fill: #ffffff !important;
+  }
+  
+  /* Ensure button has good contrast */
+  button[aria-label*="Add"],
+  button[aria-label*="Create"] {
+    background-color: #8a55c8 !important;
+  }
+  
+  button[aria-label*="Add"]:hover,
+  button[aria-label*="Create"]:hover {
+    background-color: #9967d5 !important;
+  }
+</style>
+
