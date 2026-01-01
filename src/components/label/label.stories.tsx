@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Label } from './label';
 
 const meta = {
-  title: 'Components/Label',
+  title: 'Components/Forms/Label',
   component: Label,
   args: {
     children: 'Label',

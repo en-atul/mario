@@ -5,7 +5,7 @@ import { Label } from '../label';
 import type { LoadOptionsResult } from './select-async';
 
 const meta = {
-  title: 'Components/Select/SelectAsync',
+  title: 'Components/Forms/Select/SelectAsync',
   component: SelectAsync,
   argTypes: {
     variant: {

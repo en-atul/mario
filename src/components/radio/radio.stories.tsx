@@ -4,7 +4,7 @@ import { Radio } from './radio';
 import { Label } from '../label';
 
 const meta = {
-  title: 'Components/Radio',
+  title: 'Components/Forms/Radio',
   component: Radio,
   parameters: {
     layout: 'centered',
