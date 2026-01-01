@@ -3,7 +3,7 @@ import { Dropdown } from './dropdown';
 import { Button } from '../button';
 
 const meta = {
-  title: 'Components/Dropdown',
+  title: 'Components/Overlays/Dropdown',
   component: Dropdown,
   parameters: {
     layout: 'centered',

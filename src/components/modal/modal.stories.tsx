@@ -10,7 +10,7 @@ import {
 import { Button } from '../button';
 
 const meta = {
-  title: 'Components/Modal',
+  title: 'Components/Overlays/Modal',
   component: Modal,
   parameters: {
     layout: 'centered',
