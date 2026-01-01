@@ -6,12 +6,35 @@ import { Button } from "./button";
 
 <Meta of={ButtonStories} />
 
-(Here is notes on how to use a button.)
+Buttons are interactive elements that trigger actions when clicked. They provide clear visual feedback and support multiple variants and sizes for different use cases.
 
 <Primary />
 
 <Controls />
 
-## Other Variations
+## Variants
+
+Buttons come in three visual variants:
+
+- **primary**: Primary action buttons with brand color background. Use for the main action on a page or form.
+- **secondary**: Secondary actions with white background and border. Use for less prominent actions.
+- **destructive**: Destructive actions with red background. Use for dangerous actions like delete or remove.
+
+## Sizes
+
+Available sizes: `small`, `medium`, `large`
+
+Choose the size based on the importance and context of the action. Medium is the default size.
+
+## States
+
+- **default**: Normal interactive state
+- **hover**: Visual feedback on hover
+- **active**: Pressed state
+- **disabled**: Non-interactive state with reduced opacity
+
+## Usage
+
+Buttons accept all standard HTML button props. Use semantic HTML and provide accessible labels.
 
 <Stories />

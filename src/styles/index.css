@@ -10,3 +10,19 @@ body {
   @apply dark:bg-slate-950 dark:text-white;
 }
 
+select[class*="appearance-none"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+

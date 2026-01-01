@@ -1,0 +1,26 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import LinkStories from "./link.stories";
+import { Link } from "./link";
+
+<Title>Link</Title>
+
+<Meta of={LinkStories} />
+
+Links provide navigation to other pages or sections. They include hover and focus states for better user experience.
+
+<Primary />
+
+<Controls />
+
+## Variants
+
+- **default**: Primary brand color
+- **muted**: Subtle gray for secondary links
+- **destructive**: Red for destructive actions
+
+## Accessibility
+
+Links automatically include focus-visible states for keyboard navigation. Always provide meaningful link text.
+
+<Stories />
+

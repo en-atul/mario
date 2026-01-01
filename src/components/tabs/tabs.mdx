@@ -1,0 +1,28 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import TabsStories from "./tabs.stories";
+import { Tabs } from "./tabs";
+
+<Title>Tabs</Title>
+
+<Meta of={TabsStories} />
+
+Tabs organize content into multiple panels that users can switch between. Only one tab panel is visible at a time.
+
+<Primary />
+
+<Controls />
+
+## Usage
+
+Provide an array of tab items with `value`, `label`, and `content`. Use `defaultValue` to set the initially active tab.
+
+## Disabled Tabs
+
+Set `disabled={true}` on tab items to prevent interaction. Disabled tabs are visually distinct and non-clickable.
+
+## Accessibility
+
+Tabs include proper ARIA attributes for screen readers. The active tab is clearly indicated with visual styling.
+
+<Stories />
+

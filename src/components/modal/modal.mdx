@@ -1,0 +1,38 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import ModalStories from "./modal.stories";
+import { Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "./modal";
+
+<Title>Modal</Title>
+
+<Meta of={ModalStories} />
+
+Modals are full-featured overlay dialogs that can contain complex content. They support multiple sizes and include header, body, and footer sections.
+
+<Primary />
+
+<Controls />
+
+## Sizes
+
+- **sm**: Small (max-width: 24rem)
+- **md**: Medium (max-width: 28rem, default)
+- **lg**: Large (max-width: 32rem)
+- **xl**: Extra large (max-width: 36rem)
+- **full**: Full width with margins
+
+## Structure
+
+- **ModalHeader**: Top section with title and optional close button
+- **ModalTitle**: Main heading
+- **ModalBody**: Main content area
+- **ModalFooter**: Bottom section for actions
+
+## Behavior
+
+- Closes on Escape key press
+- Closes when clicking backdrop
+- Prevents body scrolling when open
+- Focus management included
+
+<Stories />
+

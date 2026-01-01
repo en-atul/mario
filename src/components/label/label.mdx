@@ -1,0 +1,26 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import LabelStories from "./label.stories";
+import { Label } from "./label";
+
+<Title>Label</Title>
+
+<Meta of={LabelStories} />
+
+Labels provide accessible names for form controls and other UI elements. They support different visual variants and sizes.
+
+<Primary />
+
+<Controls />
+
+## Usage
+
+Always associate labels with form controls using the `htmlFor` attribute matching the control's `id`.
+
+## Variants
+
+- **default**: Standard dark text
+- **muted**: Lighter gray for secondary information
+- **error**: Red text for error states
+
+<Stories />
+

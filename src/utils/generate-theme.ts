@@ -11,7 +11,10 @@ import {
  * This maintains a single source of truth in colors.ts
  */
 export function generateThemeCSS(): string {
-  let css = "@theme {\n";
+  let css =
+    "/* This file is generated automatically. Do not edit for changes to take effect. */\n\n\n";
+
+  css += "@theme {\n";
 
   // Generate color variables from colors object
   for (const [colorName, colorShades] of Object.entries(colors)) {

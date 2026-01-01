@@ -1,0 +1,30 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import { spacing } from "./tokens/spacing";
+
+<Meta title="Tokens/Spacing" />
+
+<Title>Spacing Scale</Title>
+
+Spacing tokens define consistent spacing values used throughout the design system.
+
+<div className="space-y-3">
+  {Object.entries(spacing)
+    .sort(([a], [b]) => {
+      const numA = parseInt(a) || 0;
+      const numB = parseInt(b) || 0;
+      return numA - numB;
+    })
+    .map(([name, value]) => (
+      <div key={name} className="flex items-center gap-4">
+        <div className="w-16 text-sm font-medium font-mono">{name}</div>
+        <div className="text-sm text-slate-600 font-mono">{value}</div>
+        <div className="flex-1 flex items-center">
+          <div
+            className="bg-primary-500 h-4"
+            style={{ width: value }}
+          />
+        </div>
+      </div>
+    ))}
+</div>
+

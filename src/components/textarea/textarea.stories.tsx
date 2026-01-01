@@ -6,7 +6,6 @@ import { userEvent, within, expect } from "storybook/test";
 const meta = {
   title: "Components/TextArea",
   component: TextArea,
-  tags: ["autodocs"],
   args: {
     label: "Text Area Label",
     placeholder: "Enter some text here…",

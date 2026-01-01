@@ -1,0 +1,22 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import { radius } from "./tokens/radius";
+
+<Meta title="Tokens/Radius" />
+
+<Title>Border Radius</Title>
+
+Border radius tokens define the roundedness of corners for UI elements.
+
+<div className="space-y-4">
+  {Object.entries(radius).map(([name, value]) => (
+    <div key={name} className="flex items-center gap-4">
+      <div className="w-32 text-sm font-medium">{name}</div>
+      <div className="text-sm text-slate-600 font-mono">{value}</div>
+      <div
+        className="w-20 h-20 bg-primary-500"
+        style={{ borderRadius: value }}
+      />
+    </div>
+  ))}
+</div>
+

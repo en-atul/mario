@@ -1,0 +1,24 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import RadioStories from "./radio.stories";
+import { Radio } from "./radio";
+
+<Title>Radio</Title>
+
+<Meta of={RadioStories} />
+
+Radio buttons allow users to select a single option from a group. All radio buttons in a group must share the same `name` attribute.
+
+<Primary />
+
+<Controls />
+
+## Usage
+
+Group radio buttons by using the same `name` attribute. Only one option can be selected at a time within a group.
+
+## Accessibility
+
+Always provide labels for radio buttons. Use fieldset and legend for groups of related options.
+
+<Stories />
+

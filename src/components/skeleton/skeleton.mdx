@@ -1,0 +1,26 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import SkeletonStories from "./skeleton.stories";
+import { Skeleton } from "./skeleton";
+
+<Title>Skeleton</Title>
+
+<Meta of={SkeletonStories} />
+
+Skeleton loaders provide visual feedback while content is loading. They help maintain layout stability and improve perceived performance.
+
+<Primary />
+
+<Controls />
+
+## Usage
+
+Use skeletons to indicate loading states. Customize the size and shape using className to match your content layout.
+
+## Best Practices
+
+- Match skeleton dimensions to actual content
+- Use multiple skeleton elements for complex layouts
+- Replace with actual content as soon as it's available
+
+<Stories />
+
