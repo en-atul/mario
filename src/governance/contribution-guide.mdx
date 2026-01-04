@@ -1,0 +1,190 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Governance/Contribution Guide" />
+
+<Title>Contribution Guide</Title>
+
+This guide will help you contribute to the Mario Design System effectively.
+
+## Before You Start
+
+### Prerequisites
+- Familiarize yourself with the design system principles
+- Review existing components to understand patterns
+- Read the `.cursor/rules` file for coding standards
+- Ensure you can run Storybook locally
+
+### Getting Started
+
+1. **Fork and Clone**
+   ```bash
+   git clone https://github.com/en-atul/mario.git
+   cd mario
+   pnpm install
+   ```
+
+2. **Run Storybook**
+   ```bash
+   pnpm storybook
+   ```
+
+3. **Create a Branch**
+   ```bash
+   git checkout -b feature/your-component-name
+   ```
+
+## Component Development Workflow
+
+### Step 1: Plan Your Component
+
+Before coding:
+- [ ] Check if a similar component exists
+- [ ] Define the use case and requirements
+- [ ] List all variants and states needed
+- [ ] Plan accessibility features
+- [ ] Identify required design tokens
+
+### Step 2: Create Component Structure
+
+Follow the standard structure:
+```
+src/components/your-component/
+  ├── your-component.tsx       # Main component
+  ├── your-component.stories.tsx # Stories
+  ├── your-component.mdx        # Documentation
+  └── index.ts                  # Exports
+```
+
+### Step 3: Implement Component
+
+**Requirements:**
+- ✅ Use TypeScript with proper types
+- ✅ Use `cva` for variants
+- ✅ Use design tokens (no hardcoded values)
+- ✅ Implement keyboard navigation
+- ✅ Add ARIA attributes
+- ✅ Handle focus management
+- ✅ Support disabled states
+
+### Step 4: Add Stories
+
+Create comprehensive stories:
+- Default state
+- All variants
+- All sizes
+- Disabled states
+- Error states
+- Interactive examples
+
+### Step 5: Write Documentation
+
+MDX documentation should include:
+- Component description
+- Usage examples
+- Props table
+- Accessibility notes
+- Best practices
+
+### Step 6: Test Accessibility
+
+Verify:
+- [ ] Keyboard navigation works
+- [ ] Screen reader announces correctly
+- [ ] Focus management is proper
+- [ ] ARIA attributes are correct
+- [ ] Color contrast meets standards
+
+## Code Standards
+
+### TypeScript
+```tsx
+// ✅ Good - Explicit types
+export type ButtonProps = {
+  variant: 'primary' | 'secondary';
+  size: 'sm' | 'md' | 'lg';
+  onClick: () => void;
+};
+
+// ❌ Bad - Using any
+export type ButtonProps = {
+  variant: any;
+  onClick: any;
+};
+```
+
+### Component Structure
+```tsx
+// ✅ Good - Follows pattern
+import { cva } from 'class-variance-authority';
+import { cn } from '../../utils/cn';
+
+const buttonVariants = cva(/* ... */);
+
+export const Button = ({ className, variant, ...props }: ButtonProps) => {
+  return (
+    <button
+      className={cn(buttonVariants({ variant }), className)}
+      {...props}
+    />
+  );
+};
+```
+
+### Design Tokens
+```tsx
+// ✅ Good - Uses tokens
+import { spacing } from '../../tokens/spacing';
+<div style={{ padding: spacing[4] }} />
+
+// ❌ Bad - Hardcoded values
+<div style={{ padding: '1rem' }} />
+```
+
+## Pull Request Checklist
+
+Before submitting:
+- [ ] Component follows structure pattern
+- [ ] All stories are comprehensive
+- [ ] Documentation is complete
+- [ ] Accessibility requirements met
+- [ ] Uses design tokens (no hardcoded values)
+- [ ] TypeScript types are correct
+- [ ] No linter errors
+- [ ] Storybook builds successfully
+- [ ] Visual regression tests pass
+
+## Review Process
+
+1. **Automated Checks** - CI/CD runs tests
+2. **Code Review** - Technical implementation review
+3. **Design Review** - Visual consistency check
+4. **Accessibility Review** - A11y compliance verification
+5. **Documentation Review** - Completeness check
+
+## Common Issues
+
+### "Component doesn't match design system style"
+- Check existing components for patterns
+- Use design tokens instead of custom values
+- Follow established variant patterns
+
+### "Accessibility issues found"
+- Review WCAG 2.1 guidelines
+- Test with keyboard navigation
+- Verify screen reader announcements
+- Check focus management
+
+### "Missing documentation"
+- Add comprehensive MDX docs
+- Include usage examples
+- Document all props
+- Add accessibility notes
+
+## Questions?
+
+If you're unsure about anything:
+1. Check existing components for examples
+2. Review the `.cursor/rules` file
+3. Open a discussion issue
+4. Ask in code review comments
+

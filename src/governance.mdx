@@ -1,0 +1,144 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Governance" />
+
+<Title>Design System Governance</Title>
+
+Governance defines how the design system is maintained, evolved, and contributed to. This section outlines the processes, standards, and guidelines for managing the Mario Design System.
+
+## Core Principles
+
+### Consistency First
+- All contributions must maintain design system consistency
+- New components should follow established patterns
+- Breaking changes require careful consideration and migration plans
+
+### Accessibility Non-Negotiable
+- All components must meet WCAG 2.1 Level AA standards
+- Accessibility reviews are mandatory before merging
+- No exceptions for "quick fixes" that compromise accessibility
+
+### Token-Based Architecture
+- Design decisions must use design tokens
+- New design values require token creation first
+- No hardcoded values in components
+
+## Contribution Process
+
+### 1. Proposing Changes
+
+**For New Components:**
+1. Create an issue describing the component and use case
+2. Get approval before starting implementation
+3. Follow the component structure pattern
+4. Include comprehensive stories and documentation
+5. Ensure WCAG compliance
+
+**For Component Updates:**
+1. Document the proposed change and rationale
+2. Consider backward compatibility
+3. Update all relevant documentation
+4. Test across all variants and states
+
+**For Token Changes:**
+1. Assess impact on existing components
+2. Create migration plan if breaking change
+3. Update all affected components
+4. Document the change in token documentation
+
+### 2. Review Process
+
+All contributions go through:
+- **Code Review** - Technical implementation review
+- **Design Review** - Visual and UX consistency check
+- **Accessibility Review** - A11y compliance verification
+- **Documentation Review** - Completeness and clarity check
+
+### 3. Approval Criteria
+
+Before merging, contributions must:
+- ✅ Pass all automated tests
+- ✅ Meet WCAG 2.1 Level AA standards
+- ✅ Include comprehensive Storybook stories
+- ✅ Have complete MDX documentation
+- ✅ Follow established code patterns
+- ✅ Use design tokens appropriately
+- ✅ Have no breaking changes (or approved migration plan)
+
+## Component Lifecycle
+
+### Stages
+
+1. **Proposed** - Component idea documented and approved
+2. **In Development** - Component being built
+3. **Review** - Undergoing review process
+4. **Stable** - Released and maintained
+5. **Deprecated** - Marked for removal, migration path provided
+6. **Removed** - No longer available
+
+### Deprecation Policy
+
+- Components are deprecated with at least one major version notice
+- Migration guides provided for deprecated components
+- Deprecated components remain functional until removal
+- Breaking changes require major version bump
+
+## Versioning Strategy
+
+The design system follows Semantic Versioning (SemVer). See the [Versioning](/docs/governance-versioning--docs) section for detailed information on:
+
+- Semantic versioning principles
+- Breaking changes policy
+- Release process
+- Changelog format
+- Migration guides
+
+## Decision-Making
+
+### Design Decisions
+- Design tokens: Requires design system team approval
+- New components: Requires use case validation
+- Breaking changes: Requires team consensus
+
+### Technical Decisions
+- Architecture changes: Team discussion and approval
+- Dependency updates: Security and compatibility review
+- Performance optimizations: Benchmarking required
+
+## Maintenance
+
+### Regular Tasks
+- **Weekly** - Review and merge contributions
+- **Monthly** - Dependency updates and security patches
+- **Quarterly** - Design system audit and improvements
+- **Annually** - Major version planning and roadmap
+
+### Quality Standards
+- All components must have 100% Storybook coverage
+- Accessibility testing required for all interactive components
+- Visual regression testing via Chromatic
+- Documentation must be complete and up-to-date
+
+## Code of Conduct
+
+### For Contributors
+- Be respectful and constructive in reviews
+- Provide clear, actionable feedback
+- Follow established patterns and conventions
+- Document decisions and rationale
+- Prioritize accessibility and user experience
+
+### For Maintainers
+- Respond to contributions in a timely manner
+- Provide clear guidance and feedback
+- Maintain consistency across the system
+- Keep documentation current
+- Make decisions transparently
+
+## Getting Help
+
+- **Questions?** - Open a discussion issue
+- **Found a bug?** - Create a bug report with reproduction steps
+- **Have an idea?** - Propose it in a feature request
+- **Need clarification?** - Check documentation or ask in discussions
+

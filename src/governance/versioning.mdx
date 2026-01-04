@@ -1,0 +1,293 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Governance/Versioning" />
+
+<Title>Versioning Strategy</Title>
+
+The Mario Design System follows Semantic Versioning (SemVer) to communicate changes clearly and help users manage updates.
+
+## Semantic Versioning
+
+Version numbers follow the format: `MAJOR.MINOR.PATCH` (e.g., `1.2.3`)
+
+### Major Version (X.0.0)
+**Breaking changes** that require user action:
+
+- Component removals
+- API changes (prop renames, removal, type changes)
+- Design token changes that affect existing components
+- Architecture changes
+- Dependency updates that break compatibility
+
+**Example:** `1.0.0` → `2.0.0`
+- `Button` component API changed
+- `primary` color token value changed
+- Removed deprecated `OldComponent`
+
+### Minor Version (0.X.0)
+**New features** that are backward compatible:
+
+- New components
+- New component variants
+- New design tokens
+- New utilities or helpers
+- Non-breaking API additions
+
+**Example:** `1.2.0` → `1.3.0`
+- Added `Card` component
+- Added `outline` variant to Button
+- Added new spacing token `14`
+
+### Patch Version (0.0.X)
+**Bug fixes** and improvements:
+
+- Bug fixes
+- Documentation updates
+- Performance improvements
+- Accessibility improvements
+- Non-breaking refactoring
+
+**Example:** `1.2.3` → `1.2.4`
+- Fixed focus trap in Modal
+- Improved Button hover state
+- Updated documentation
+
+## Breaking Changes Policy
+
+### What Constitutes a Breaking Change?
+
+1. **Component Removal**
+   - Removing a component entirely
+   - Removing a component variant
+   - Removing a component prop
+
+2. **API Changes**
+   - Renaming props
+   - Changing prop types
+   - Changing component behavior
+   - Removing props
+
+3. **Token Changes**
+   - Changing token values that affect visual appearance
+   - Removing tokens
+   - Renaming tokens
+
+4. **Dependency Changes**
+   - Upgrading to incompatible dependency versions
+   - Removing dependencies
+   - Changing peer dependency requirements
+
+### Handling Breaking Changes
+
+1. **Deprecation Period**
+   - Mark as deprecated in current version
+   - Provide migration guide
+   - Support for at least one major version cycle
+
+2. **Migration Guides**
+   - Clear before/after examples
+   - Step-by-step migration instructions
+   - Code examples
+   - Common pitfalls
+
+3. **Communication**
+   - Release notes highlight breaking changes
+   - Changelog clearly marks breaking changes
+   - Announcement before major release
+
+## Release Process
+
+### Pre-Release
+
+1. **Collect Changes**
+   - Review all merged PRs since last release
+   - Categorize changes (breaking, feature, fix)
+   - Determine version bump
+
+2. **Update Documentation**
+   - Update changelog
+   - Update migration guides if needed
+   - Update version numbers
+
+3. **Testing**
+   - Run all tests
+   - Visual regression testing
+   - Accessibility audit
+   - Cross-browser testing
+
+### Release
+
+1. **Version Bump**
+   ```bash
+   # Update package.json version
+   # Update changelog
+   # Create git tag
+   ```
+
+2. **Publish**
+   - Publish Storybook to Chromatic
+   - Publish package (if applicable)
+   - Create GitHub release
+
+3. **Announcement**
+   - Release notes
+   - Highlight breaking changes
+   - Share migration guides
+
+### Post-Release
+
+1. **Monitor**
+   - Watch for issues
+   - Collect feedback
+   - Track adoption
+
+2. **Support**
+   - Answer questions
+   - Help with migrations
+   - Fix critical issues
+
+## Changelog Format
+
+### Structure
+
+```markdown
+## [Version] - YYYY-MM-DD
+
+### Breaking Changes
+- Description of breaking change
+- Migration guide link
+
+### Added
+- New component: ComponentName
+- New feature description
+
+### Changed
+- Improvement description
+
+### Fixed
+- Bug fix description
+
+### Deprecated
+- Component marked for removal
+```
+
+### Example
+
+```markdown
+## [2.0.0] - 2024-01-15
+
+### Breaking Changes
+- **Button API**: `variant` prop now uses `primary` instead of `default`
+  - Migration: Replace `variant="default"` with `variant="primary"`
+- **Removed**: `OldModal` component (use `Modal` instead)
+
+### Added
+- New `Card` component
+- New `outline` variant for Button
+- New spacing token `14`
+
+### Changed
+- Improved Modal focus trap behavior
+- Enhanced Select keyboard navigation
+
+### Fixed
+- Fixed Tooltip positioning on mobile
+- Resolved Dropdown z-index issues
+
+### Deprecated
+- `OldComponent` will be removed in v3.0.0
+```
+
+## Migration Guides
+
+### When to Create Migration Guides
+
+- Major version releases
+- Component deprecations
+- Significant API changes
+- Token changes affecting multiple components
+
+### Migration Guide Structure
+
+1. **Overview** - What changed and why
+2. **Before/After** - Code examples
+3. **Step-by-Step** - Migration instructions
+4. **Common Issues** - Troubleshooting
+5. **Timeline** - When changes take effect
+
+### Example Migration Guide
+
+```markdown
+# Migrating from v1.x to v2.x
+
+## Overview
+Version 2.0 introduces a new Button API to improve consistency.
+
+## Changes
+
+### Button Variant Prop
+**Before:**
+```tsx
+<Button variant="default">Click me</Button>
+```
+
+**After:**
+```tsx
+<Button variant="primary">Click me</Button>
+```
+
+## Migration Steps
+
+1. Find all `Button` components with `variant="default"`
+2. Replace with `variant="primary"`
+3. Test all button interactions
+4. Update any related tests
+
+## Timeline
+- v1.5.0: `variant="default"` deprecated
+- v2.0.0: `variant="default"` removed
+```
+
+## Version Support
+
+### Current Version
+- Full support
+- Active development
+- Bug fixes
+- New features
+
+### Previous Major Version
+- Security patches
+- Critical bug fixes
+- No new features
+- Limited support period
+
+### Older Versions
+- No support
+- No updates
+- Migration recommended
+
+## Best Practices
+
+### For Maintainers
+- **Plan breaking changes** - Deprecate before removing
+- **Clear communication** - Document all changes
+- **Provide migration paths** - Make upgrades easy
+- **Test thoroughly** - Ensure stability
+- **Version consistently** - Follow SemVer strictly
+
+### For Users
+- **Read release notes** - Understand what changed
+- **Follow migration guides** - Upgrade properly
+- **Test after updates** - Verify everything works
+- **Report issues** - Help improve the system
+- **Stay current** - Don't fall too far behind
+
+## Version History
+
+Track major milestones and decisions:
+
+- **v1.0.0** - Initial release
+- **v2.0.0** - Major API improvements
+- Future versions...
+

@@ -68,6 +68,8 @@ const preview: Preview = {
           "Patterns",
           ["Form Layout", "Error Handling", "Modal Usage"],
           "Components",
+          "Governance",
+          ["Contribution Guide", "Component Lifecycle", "Versioning"],
           [
             "Forms",
             [
