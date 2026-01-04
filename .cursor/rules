@@ -1,0 +1,52 @@
+# Mario Design System - Cursor Configuration
+
+## Project Context
+This is a React component library built with TypeScript, Tailwind CSS v4, and Storybook. The design system follows a token-based architecture with comprehensive accessibility standards.
+
+## Core Principles
+
+### Token-First Approach
+- **Never hardcode design values** - Always use tokens from `src/tokens/`
+- Tokens are the single source of truth for all design decisions
+- When adding new design values, create tokens first, then use them in components
+- Token files: colors, typography, spacing, radius, elevation, motion
+
+### Accessibility First
+- **All interactive components must be keyboard accessible** - Full keyboard navigation support
+- **ARIA attributes required** - Proper roles, labels, and state announcements
+- **Focus management mandatory** - Focus trapping for modals/dialogs, proper focus restoration
+- **Screen reader support** - Semantic HTML and ARIA where needed
+- **WCAG 2.1 Level AA compliance** - Not optional, it's a requirement
+
+### Component Architecture
+- Use `class-variance-authority` (cva) for variant management
+- Use `clsx` and `tailwind-merge` for className composition
+- Functional components with hooks only
+- TypeScript strict typing - no `any` types
+- Follow existing component patterns - consistency is key
+
+### Component Structure Pattern
+Every component follows this structure:
+- `component-name.tsx` - Main component implementation
+- `component-name.stories.tsx` - Storybook stories
+- `component-name.mdx` - Component documentation
+- `index.ts` - Clean exports
+
+### Documentation Standards
+- Every component must have MDX documentation
+- Include: usage examples, props table, accessibility notes
+- Token documentation in `src/*.mdx` files
+- Stories demonstrate all variants and states
+
+### Testing Approach
+- Storybook for component development and testing
+- Visual regression testing with Chromatic
+- All components must have comprehensive stories
+
+## File Organization
+- `src/components/` - All React components
+- `src/tokens/` - Design token definitions
+- `src/utils/` - Shared utility functions
+- `src/styles/` - Global styles and CSS
+- `.storybook/` - Storybook configuration
+
