@@ -1,0 +1,135 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+import { useState } from "react";
+import { Input } from "../components/input";
+import { Label } from "../components/label";
+import { Button } from "../components/button";
+import { TextArea } from "../components/textarea";
+import { Select } from "../components/select";
+
+<Meta title="Patterns/Form Layout" />
+
+<Title>Form Layout Pattern</Title>
+
+A standard form layout pattern that demonstrates proper spacing, labels, validation, and accessibility.
+
+## Standard Form Layout
+
+This pattern shows the recommended structure for forms with proper spacing, labels, and error handling.
+
+```tsx
+import { Input, Label, Button, TextArea, Select } from 'mario';
+
+function FormExample() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    country: '',
+  });
+
+  return (
+    <form className="space-y-6 max-w-md">
+      <div className="space-y-2">
+        <Label htmlFor="name">Name</Label>
+        <Input
+          id="name"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          placeholder="Enter your name"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          type="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="country">Country</Label>
+        <Select id="country" value={formData.country}>
+          <option value="">Select a country</option>
+          <option value="us">United States</option>
+          <option value="uk">United Kingdom</option>
+        </Select>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="message">Message</Label>
+        <TextArea
+          id="message"
+          label="Message"
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          placeholder="Enter your message"
+        />
+      </div>
+
+      <div className="flex gap-3">
+        <Button type="submit">Submit</Button>
+        <Button type="button" variant="secondary">Cancel</Button>
+      </div>
+    </form>
+  );
+}
+```
+
+## Key Principles
+
+### 1. Proper Label Association
+- Always use `<Label>` with `htmlFor` matching input `id`
+- Labels should be clear and descriptive
+- Required fields should be indicated
+
+### 2. Consistent Spacing
+- Use consistent vertical spacing between form fields
+- Group related fields together
+- Use `space-y-*` utilities for vertical rhythm
+
+### 3. Error Handling
+- Show validation errors clearly
+- Use error variant for inputs with errors
+- Provide helpful error messages
+
+### 4. Accessibility
+- All inputs must have associated labels
+- Use proper input types (`email`, `tel`, etc.)
+- Provide clear error announcements
+- Maintain logical tab order
+
+## Variations
+
+### Inline Form
+For compact forms, you can use horizontal layouts:
+
+```tsx
+<div className="flex gap-4 items-end">
+  <div className="flex-1">
+    <Label htmlFor="search">Search</Label>
+    <Input id="search" placeholder="Search..." />
+  </div>
+  <Button>Search</Button>
+</div>
+```
+
+### Multi-Column Form
+For forms with many fields:
+
+```tsx
+<div className="grid grid-cols-2 gap-4">
+  <div className="space-y-2">
+    <Label htmlFor="firstName">First Name</Label>
+    <Input id="firstName" />
+  </div>
+  <div className="space-y-2">
+    <Label htmlFor="lastName">Last Name</Label>
+    <Input id="lastName" />
+  </div>
+</div>
+```
+

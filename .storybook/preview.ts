@@ -65,6 +65,8 @@ const preview: Preview = {
           "Introduction",
           "Tokens",
           ["Colors", "Typography", "Spacing", "Radius", "Elevation", "Motion", "Icons"],
+          "Patterns",
+          ["Form Layout", "Error Handling", "Modal Usage"],
           "Components",
           [
             "Forms",

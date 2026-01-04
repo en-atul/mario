@@ -1,0 +1,71 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Patterns/Modal Usage" />
+
+<Title>Modal Usage Pattern</Title>
+
+Guidelines for when and how to use modals effectively.
+
+## When to Use Modals
+
+### ✅ Appropriate Use Cases
+- **Confirmation dialogs** - Critical actions that need confirmation
+- **Focused tasks** - Single, focused interactions
+- **Important information** - Alerts that require immediate attention
+- **Quick forms** - Short forms that don't need a full page
+
+### ❌ Avoid Modals For
+- **Complex forms** - Use a dedicated page instead
+- **Multi-step processes** - Consider a wizard pattern
+- **Non-critical information** - Use tooltips or inline help
+- **Frequent actions** - Don't interrupt user flow
+
+## Modal Structure
+
+### Standard Modal Pattern
+
+```tsx
+<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+  <ModalHeader>
+    <ModalTitle>Confirm Action</ModalTitle>
+  </ModalHeader>
+  <ModalBody>
+    <p>Are you sure you want to proceed?</p>
+  </ModalBody>
+  <ModalFooter>
+    <Button variant="secondary" onClick={() => setIsOpen(false)}>
+      Cancel
+    </Button>
+    <Button onClick={handleConfirm}>Confirm</Button>
+  </ModalFooter>
+</Modal>
+```
+
+## Best Practices
+
+### Content Guidelines
+- **Keep it focused** - One clear purpose per modal
+- **Clear title** - Descriptive, action-oriented title
+- **Concise content** - Avoid long scrolling content
+- **Clear actions** - Primary action should be obvious
+
+### Interaction Guidelines
+- **Escape to close** - Always allow Escape key
+- **Click outside** - Close on backdrop click (optional)
+- **Focus management** - Focus trapped within modal
+- **Return focus** - Restore focus to trigger on close
+
+### Accessibility
+- **ARIA labels** - Proper `aria-labelledby` and `aria-describedby`
+- **Focus trap** - Keyboard navigation stays within modal
+- **Screen reader** - Announce modal opening/closing
+- **Keyboard support** - Full keyboard navigation
+
+## Size Guidelines
+
+- **Small (sm)** - Confirmations, simple alerts
+- **Medium (md)** - Standard forms, content display
+- **Large (lg)** - Complex forms, detailed content
+- **Extra Large (xl)** - Rich content, data tables
+- **Full** - Mobile-optimized, full-screen experience
+

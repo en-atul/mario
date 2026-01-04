@@ -1,0 +1,68 @@
+import { Meta, Title } from "@storybook/addon-docs/blocks";
+
+<Meta title="Patterns/Error Handling" />
+
+<Title>Error Handling Pattern</Title>
+
+Guidelines for displaying and handling errors in forms and user interactions.
+
+## Error Display Principles
+
+### 1. Inline Validation
+Show errors directly below or next to the input field:
+
+```tsx
+<div className="space-y-2">
+  <Label htmlFor="email">Email</Label>
+  <Input
+    id="email"
+    variant="error"
+    aria-invalid="true"
+    aria-describedby="email-error"
+  />
+  <p id="email-error" className="text-sm text-danger-600">
+    Please enter a valid email address
+  </p>
+</div>
+```
+
+### 2. Error States
+- Use `variant="error"` on inputs with errors
+- Set `aria-invalid="true"` for screen readers
+- Use `aria-describedby` to link error messages
+- Error text should use danger color tokens
+
+### 3. Toast Notifications
+For form submission errors or system errors:
+
+```tsx
+<Toast
+  variant="error"
+  title="Error"
+  description="Failed to save. Please try again."
+/>
+```
+
+## Best Practices
+
+### ✅ Do
+- Show errors immediately after user interaction
+- Provide clear, actionable error messages
+- Use consistent error styling
+- Announce errors to screen readers
+- Allow users to easily correct errors
+
+### ❌ Don't
+- Don't show errors before user interaction
+- Don't use technical jargon in error messages
+- Don't hide errors in tooltips only
+- Don't prevent form submission without clear feedback
+- Don't use red for non-error states
+
+## Accessibility
+
+- Always use `aria-invalid="true"` for invalid inputs
+- Link error messages with `aria-describedby`
+- Use `role="alert"` for critical errors
+- Ensure error messages are keyboard accessible
+
