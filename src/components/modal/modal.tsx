@@ -125,7 +125,7 @@ export const Modal = ({
   );
 };
 
-export const ModalHeader = ({
+const ModalHeaderComponent = ({
   className,
   ...props
 }: ComponentProps<'div'>) => (
@@ -135,7 +135,7 @@ export const ModalHeader = ({
   />
 );
 
-export const ModalTitle = ({
+const ModalTitleComponent = ({
   className,
   id,
   ...props
@@ -151,14 +151,14 @@ export const ModalTitle = ({
   );
 };
 
-export const ModalBody = ({
+const ModalBodyComponent = ({
   className,
   ...props
 }: ComponentProps<'div'>) => (
   <div className={cn('p-6', className)} {...props} />
 );
 
-export const ModalFooter = ({
+const ModalFooterComponent = ({
   className,
   ...props
 }: ComponentProps<'div'>) => (
@@ -167,4 +167,16 @@ export const ModalFooter = ({
     {...props}
   />
 );
+
+// Compound component pattern
+Modal.Header = ModalHeaderComponent;
+Modal.Title = ModalTitleComponent;
+Modal.Body = ModalBodyComponent;
+Modal.Footer = ModalFooterComponent;
+
+// Export individual components for backward compatibility
+export const ModalHeader = ModalHeaderComponent;
+export const ModalTitle = ModalTitleComponent;
+export const ModalBody = ModalBodyComponent;
+export const ModalFooter = ModalFooterComponent;
 

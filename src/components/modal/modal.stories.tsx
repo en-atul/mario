@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import {
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalBody,
-  ModalFooter,
-} from './modal';
+import { Modal } from './modal';
 import { Button } from '../button';
 
 const meta = {
@@ -27,18 +21,18 @@ const ModalDemo = ({ size }: { size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' }) => {
     <>
       <Button onClick={() => setOpen(true)}>Open Modal</Button>
       <Modal open={open} onClose={() => setOpen(false)} size={size}>
-        <ModalHeader>
-          <ModalTitle>Modal Title</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+        <Modal.Header>
+          <Modal.Title>Modal Title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <p>This is the modal content. You can put any content here.</p>
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
           <Button variant="secondary" onClick={() => setOpen(false)}>
             Cancel
           </Button>
           <Button onClick={() => setOpen(false)}>Confirm</Button>
-        </ModalFooter>
+        </Modal.Footer>
       </Modal>
     </>
   );

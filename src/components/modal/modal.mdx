@@ -21,10 +21,52 @@ Modals are full-featured overlay dialogs that can contain complex content. They 
 
 ## Structure
 
-- **ModalHeader**: Top section with title and optional close button
-- **ModalTitle**: Main heading
-- **ModalBody**: Main content area
-- **ModalFooter**: Bottom section for actions
+Modal uses a compound component pattern. You can access sub-components via `Modal.Header`, `Modal.Title`, etc.
+
+### Compound Component Pattern (Recommended)
+
+```tsx
+import { Modal } from 'mario';
+
+<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+  <Modal.Header>
+    <Modal.Title>Modal Title</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <p>Modal content goes here</p>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button onClick={() => setIsOpen(false)}>Close</Button>
+  </Modal.Footer>
+</Modal>
+```
+
+### Individual Components (Backward Compatible)
+
+You can also import and use components individually:
+
+```tsx
+import { Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'mario';
+
+<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+  <ModalHeader>
+    <ModalTitle>Modal Title</ModalTitle>
+  </ModalHeader>
+  <ModalBody>
+    <p>Modal content goes here</p>
+  </ModalBody>
+  <ModalFooter>
+    <Button onClick={() => setIsOpen(false)}>Close</Button>
+  </ModalFooter>
+</Modal>
+```
+
+### Component Parts
+
+- **Modal.Header**: Top section with title and optional close button
+- **Modal.Title**: Main heading (automatically linked via ARIA)
+- **Modal.Body**: Main content area
+- **Modal.Footer**: Bottom section for actions
 
 ## Behavior
 

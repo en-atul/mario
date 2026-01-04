@@ -22,22 +22,55 @@ Guidelines for when and how to use modals effectively.
 
 ## Modal Structure
 
+Modal uses a compound component pattern. Access sub-components via `Modal.Header`, `Modal.Title`, `Modal.Body`, and `Modal.Footer`.
+
 ### Standard Modal Pattern
 
 ```tsx
+import { Modal } from 'mario';
+import { Button } from 'mario';
+
 <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-  <ModalHeader>
-    <ModalTitle>Confirm Action</ModalTitle>
-  </ModalHeader>
-  <ModalBody>
+  <Modal.Header>
+    <Modal.Title>Confirm Action</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
     <p>Are you sure you want to proceed?</p>
-  </ModalBody>
-  <ModalFooter>
+  </Modal.Body>
+  <Modal.Footer>
     <Button variant="secondary" onClick={() => setIsOpen(false)}>
       Cancel
     </Button>
     <Button onClick={handleConfirm}>Confirm</Button>
-  </ModalFooter>
+  </Modal.Footer>
+</Modal>
+```
+
+### Minimal Modal
+
+You can use Modal with just a body if needed:
+
+```tsx
+<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+  <Modal.Body>
+    <p>Simple message or content</p>
+  </Modal.Body>
+</Modal>
+```
+
+### Modal with Custom Header
+
+```tsx
+<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+  <Modal.Header>
+    <Modal.Title>Custom Title</Modal.Title>
+    <Button variant="ghost" onClick={() => setIsOpen(false)}>
+      <XIcon />
+    </Button>
+  </Modal.Header>
+  <Modal.Body>
+    <p>Content with custom header actions</p>
+  </Modal.Body>
 </Modal>
 ```
 
