@@ -45,7 +45,6 @@ export const Dropdown = ({
     };
   }, [isOpen]);
 
-  // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
 

@@ -17,7 +17,6 @@ export function getFocusableElements(container: HTMLElement): HTMLElement[] {
     container.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS)
   );
   return elements.filter((el) => {
-    // Filter out elements that are not visible
     const style = window.getComputedStyle(el);
     return style.display !== 'none' && style.visibility !== 'hidden';
   });
@@ -31,20 +30,17 @@ export function trapFocus(container: HTMLElement): () => void {
   const firstElement = focusableElements[0];
   const lastElement = focusableElements[focusableElements.length - 1];
 
-  // Focus the first element
   firstElement.focus();
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key !== 'Tab') return;
 
     if (e.shiftKey) {
-      // Shift + Tab
       if (document.activeElement === firstElement) {
         e.preventDefault();
         lastElement.focus();
       }
     } else {
-      // Tab
       if (document.activeElement === lastElement) {
         e.preventDefault();
         firstElement.focus();
@@ -71,7 +67,6 @@ export function saveFocus(): HTMLElement | null {
  */
 export function restoreFocus(element: HTMLElement | null): void {
   if (element && typeof element.focus === 'function') {
-    // Use requestAnimationFrame to ensure the element is in the DOM
     requestAnimationFrame(() => {
       element.focus();
     });

@@ -142,7 +142,6 @@ export const SelectMulti = ({
     onChange?.(newValue);
   };
 
-  // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
 
@@ -177,7 +176,6 @@ export const SelectMulti = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, focusedIndex, filteredOptions.length]);
 
-  // Reset focused index when options change
   useEffect(() => {
     setFocusedIndex(-1);
   }, [filteredOptions.length, searchTerm]);

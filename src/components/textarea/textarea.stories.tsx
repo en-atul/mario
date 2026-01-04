@@ -28,9 +28,7 @@ const meta = {
       control: "boolean",
       description: "Disables the text area",
       table: {
-        defaultValue:{
-          // summary: false,
-        }
+        defaultValue: {}
       }
     },
     required: {
@@ -38,9 +36,7 @@ const meta = {
       control: "boolean",
       description: "Marks the text area as required",
       table: {
-        defaultValue: {
-          // summary: false,
-        },
+        defaultValue: {},
       },
     },
   },

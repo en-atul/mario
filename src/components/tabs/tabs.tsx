@@ -24,7 +24,6 @@ export const Tabs = ({ items, defaultValue, className }: TabsProps) => {
 
   const activeItem = items.find((item) => item.value === activeTab);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const enabledItems = items.filter((item) => !item.disabled);

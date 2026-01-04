@@ -31,7 +31,6 @@ export const Tooltip = ({
     right: 'right-full top-1/2 -translate-y-1/2 border-r-slate-900',
   };
 
-  // Clone children to add aria-describedby and focus handlers
   const childWithProps = isValidElement(children)
     ? cloneElement(children, {
         'aria-describedby': isVisible ? tooltipId : undefined,

@@ -35,18 +35,15 @@ export const Modal = ({
   const modalId = useId();
   const titleId = `${modalId}-title`;
 
-  // Save focus when modal opens
   useEffect(() => {
     if (open) {
       previousFocusRef.current = saveFocus();
     } else {
-      // Restore focus when modal closes
       restoreFocus(previousFocusRef.current);
       previousFocusRef.current = null;
     }
   }, [open]);
 
-  // Body scroll lock
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -58,7 +55,6 @@ export const Modal = ({
     };
   }, [open]);
 
-  // Escape key handler
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && open) {
@@ -71,7 +67,6 @@ export const Modal = ({
     return () => document.removeEventListener('keydown', handleEscape);
   }, [open, onClose]);
 
-  // Focus trap
   useEffect(() => {
     if (open && modalRef.current) {
       const cleanup = trapFocus(modalRef.current);
@@ -168,13 +163,11 @@ const ModalFooterComponent = ({
   />
 );
 
-// Compound component pattern
 Modal.Header = ModalHeaderComponent;
 Modal.Title = ModalTitleComponent;
 Modal.Body = ModalBodyComponent;
 Modal.Footer = ModalFooterComponent;
 
-// Export individual components for backward compatibility
 export const ModalHeader = ModalHeaderComponent;
 export const ModalTitle = ModalTitleComponent;
 export const ModalBody = ModalBodyComponent;

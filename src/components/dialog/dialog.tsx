@@ -26,18 +26,15 @@ export const Dialog = ({
   const titleId = `${dialogId}-title`;
   const descriptionId = `${dialogId}-description`;
 
-  // Save focus when dialog opens
   useEffect(() => {
     if (open) {
       previousFocusRef.current = saveFocus();
     } else {
-      // Restore focus when dialog closes
       restoreFocus(previousFocusRef.current);
       previousFocusRef.current = null;
     }
   }, [open]);
 
-  // Body scroll lock
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -49,7 +46,6 @@ export const Dialog = ({
     };
   }, [open]);
 
-  // Escape key handler
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && open) {
@@ -62,7 +58,6 @@ export const Dialog = ({
     return () => document.removeEventListener('keydown', handleEscape);
   }, [open, onOpenChange]);
 
-  // Focus trap
   useEffect(() => {
     if (open && dialogRef.current) {
       const cleanup = trapFocus(dialogRef.current);
