@@ -25,6 +25,13 @@ This is a React component library built with TypeScript, Tailwind CSS v4, and St
 - TypeScript strict typing - no `any` types
 - Follow existing component patterns - consistency is key
 
+### Compound Component Pattern
+- **Use compound components when components have sub-components** - Provides better API design and namespace organization
+- Example: `Modal.Header`, `Modal.Title`, `Modal.Body`, `Modal.Footer` instead of separate `ModalHeader`, `ModalTitle`, etc.
+- Maintain backward compatibility by also exporting individual components
+- Attach sub-components to main component: `Component.SubComponent = SubComponent`
+- Use React Context when sub-components need to share state/IDs with parent
+
 ### Component Structure Pattern
 Every component follows this structure:
 - `component-name.tsx` - Main component implementation
