@@ -1,6 +1,7 @@
 import { type ComponentProps, type ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { animation, transition } from '../../tokens/motion';
 import { cn } from '../../utils/cn';
 
 export type DialogProps = {
@@ -39,20 +40,20 @@ export const Dialog = ({
               >
                 <motion.div
                   className="fixed inset-0 bg-black/50"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  initial={animation.overlay.initial}
+                  animate={animation.overlay.animate}
+                  exit={animation.overlay.exit}
+                  transition={transition.overlay}
                 />
                 <motion.div
                   className={cn(
                     'relative z-50 w-full max-w-lg rounded-lg border border-slate-200 bg-white shadow-lg',
                     className
                   )}
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  initial={animation.modal.initial}
+                  animate={animation.modal.animate}
+                  exit={animation.modal.exit}
+                  transition={transition.modal}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {children}

@@ -108,6 +108,7 @@ All design tokens are centralized in `src/tokens/`:
 - **Spacing** - Consistent spacing scale
 - **Radius** - Border radius values
 - **Elevation** - Box shadow tokens
+- **Motion** - Animation durations, easing curves, and animation presets
 
 View all tokens in Storybook under the "Tokens" section.
 
@@ -143,7 +144,8 @@ mario/
 │   │   ├── typography.ts
 │   │   ├── spacing.ts
 │   │   ├── radius.ts
-│   │   └── elevation.ts
+│   │   ├── elevation.ts
+│   │   └── motion.ts
 │   ├── styles/          # Global styles
 │   └── utils/           # Utility functions
 └── package.json
