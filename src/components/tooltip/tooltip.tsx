@@ -1,4 +1,4 @@
-import { type ComponentProps, type ReactNode, useState } from 'react';
+import { type ReactNode, useState, useId, cloneElement, isValidElement } from 'react';
 import { cn } from '../../utils/cn';
 
 export type TooltipProps = {
@@ -15,6 +15,7 @@ export const Tooltip = ({
   className,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const tooltipId = useId();
 
   const sideClasses = {
     top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
@@ -30,15 +31,25 @@ export const Tooltip = ({
     right: 'right-full top-1/2 -translate-y-1/2 border-r-slate-900',
   };
 
+  // Clone children to add aria-describedby and focus handlers
+  const childWithProps = isValidElement(children)
+    ? cloneElement(children, {
+        'aria-describedby': isVisible ? tooltipId : undefined,
+        onFocus: () => setIsVisible(true),
+        onBlur: () => setIsVisible(false),
+      } as any)
+    : children;
+
   return (
     <div
       className="relative inline-block"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
     >
-      {children}
+      {childWithProps}
       {isVisible && (
         <div
+          id={tooltipId}
           className={cn(
             'absolute z-50 rounded-md bg-slate-900 px-3 py-1.5 text-sm text-white shadow-lg',
             sideClasses[side],
@@ -52,6 +63,7 @@ export const Tooltip = ({
               'absolute h-0 w-0 border-4 border-transparent',
               arrowClasses[side]
             )}
+            aria-hidden="true"
           />
         </div>
       )}

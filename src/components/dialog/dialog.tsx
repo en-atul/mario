@@ -1,8 +1,11 @@
-import { type ComponentProps, type ReactNode, useEffect } from 'react';
+import { type ComponentProps, type ReactNode, useEffect, useRef, useId, createContext, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { animation, transition } from '../../tokens/motion';
+import { trapFocus, saveFocus, restoreFocus } from '../../utils/focus-trap';
 import { cn } from '../../utils/cn';
+
+const DialogContext = createContext<{ titleId: string; descriptionId: string } | null>(null);
 
 export type DialogProps = {
   open: boolean;
@@ -17,6 +20,24 @@ export const Dialog = ({
   children,
   className,
 }: DialogProps) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const dialogId = useId();
+  const titleId = `${dialogId}-title`;
+  const descriptionId = `${dialogId}-description`;
+
+  // Save focus when dialog opens
+  useEffect(() => {
+    if (open) {
+      previousFocusRef.current = saveFocus();
+    } else {
+      // Restore focus when dialog closes
+      restoreFocus(previousFocusRef.current);
+      previousFocusRef.current = null;
+    }
+  }, [open]);
+
+  // Body scroll lock
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -26,6 +47,27 @@ export const Dialog = ({
     return () => {
       document.body.style.overflow = '';
     };
+  }, [open]);
+
+  // Escape key handler
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && open) {
+        onOpenChange(false);
+      }
+    };
+    if (open) {
+      document.addEventListener('keydown', handleEscape);
+    }
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [open, onOpenChange]);
+
+  // Focus trap
+  useEffect(() => {
+    if (open && dialogRef.current) {
+      const cleanup = trapFocus(dialogRef.current);
+      return cleanup;
+    }
   }, [open]);
 
   return (
@@ -46,6 +88,11 @@ export const Dialog = ({
                   transition={transition.overlay}
                 />
                 <motion.div
+                  ref={dialogRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby={titleId}
+                  aria-describedby={descriptionId}
                   className={cn(
                     'relative z-50 w-full max-w-lg rounded-lg border border-slate-200 bg-white shadow-lg',
                     className
@@ -56,7 +103,9 @@ export const Dialog = ({
                   transition={transition.modal}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {children}
+                  <DialogContext.Provider value={{ titleId, descriptionId }}>
+                    {children}
+                  </DialogContext.Provider>
                 </motion.div>
               </div>
             )}
@@ -79,20 +128,35 @@ export const DialogHeader = ({
 
 export const DialogTitle = ({
   className,
+  id,
   ...props
-}: ComponentProps<'h2'>) => (
-  <h2
-    className={cn('text-lg font-semibold leading-none tracking-tight', className)}
-    {...props}
-  />
-);
+}: ComponentProps<'h2'>) => {
+  const context = useContext(DialogContext);
+  const titleId = id || context?.titleId;
+  return (
+    <h2
+      id={titleId}
+      className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+      {...props}
+    />
+  );
+};
 
 export const DialogDescription = ({
   className,
+  id,
   ...props
-}: ComponentProps<'p'>) => (
-  <p className={cn('text-sm text-slate-600', className)} {...props} />
-);
+}: ComponentProps<'p'>) => {
+  const context = useContext(DialogContext);
+  const descriptionId = id || context?.descriptionId;
+  return (
+    <p
+      id={descriptionId}
+      className={cn('text-sm text-slate-600', className)}
+      {...props}
+    />
+  );
+};
 
 export const DialogContent = ({
   className,

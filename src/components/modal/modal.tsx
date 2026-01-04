@@ -1,8 +1,11 @@
-import { type ComponentProps, type ReactNode, useEffect } from 'react';
+import { type ComponentProps, type ReactNode, useEffect, useRef, useId, createContext, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { animation, transition } from '../../tokens/motion';
+import { trapFocus, saveFocus, restoreFocus } from '../../utils/focus-trap';
 import { cn } from '../../utils/cn';
+
+const ModalContext = createContext<{ titleId: string } | null>(null);
 
 export type ModalProps = {
   open: boolean;
@@ -27,6 +30,23 @@ export const Modal = ({
   size = 'md',
   className,
 }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const modalId = useId();
+  const titleId = `${modalId}-title`;
+
+  // Save focus when modal opens
+  useEffect(() => {
+    if (open) {
+      previousFocusRef.current = saveFocus();
+    } else {
+      // Restore focus when modal closes
+      restoreFocus(previousFocusRef.current);
+      previousFocusRef.current = null;
+    }
+  }, [open]);
+
+  // Body scroll lock
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -38,15 +58,26 @@ export const Modal = ({
     };
   }, [open]);
 
+  // Escape key handler
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && open) {
         onClose();
       }
     };
-    document.addEventListener('keydown', handleEscape);
+    if (open) {
+      document.addEventListener('keydown', handleEscape);
+    }
     return () => document.removeEventListener('keydown', handleEscape);
   }, [open, onClose]);
+
+  // Focus trap
+  useEffect(() => {
+    if (open && modalRef.current) {
+      const cleanup = trapFocus(modalRef.current);
+      return cleanup;
+    }
+  }, [open]);
 
   return (
     <>
@@ -66,6 +97,10 @@ export const Modal = ({
                   transition={transition.overlay}
                 />
                 <motion.div
+                  ref={modalRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby={titleId}
                   className={cn(
                     'relative z-50 w-full rounded-lg border border-slate-200 bg-white shadow-xl',
                     sizeClasses[size],
@@ -77,7 +112,9 @@ export const Modal = ({
                   transition={transition.modal}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {children}
+                  <ModalContext.Provider value={{ titleId }}>
+                    {children}
+                  </ModalContext.Provider>
                 </motion.div>
               </div>
             )}
@@ -100,13 +137,19 @@ export const ModalHeader = ({
 
 export const ModalTitle = ({
   className,
+  id,
   ...props
-}: ComponentProps<'h2'>) => (
-  <h2
-    className={cn('text-xl font-semibold', className)}
-    {...props}
-  />
-);
+}: ComponentProps<'h2'>) => {
+  const context = useContext(ModalContext);
+  const titleId = id || context?.titleId;
+  return (
+    <h2
+      id={titleId}
+      className={cn('text-xl font-semibold', className)}
+      {...props}
+    />
+  );
+};
 
 export const ModalBody = ({
   className,

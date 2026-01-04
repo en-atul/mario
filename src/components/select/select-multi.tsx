@@ -1,4 +1,4 @@
-import { type ComponentProps, useState, useRef, useEffect } from 'react';
+import { type ComponentProps, useState, useRef, useEffect, useId } from 'react';
 import { createPortal } from 'react-dom';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ChevronDown, X, Check } from 'lucide-react';
@@ -52,8 +52,12 @@ export const SelectMulti = ({
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [position, setPosition] = useState({ top: 0, left: 0, width: 0 });
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const listboxRef = useRef<HTMLDivElement>(null);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const listboxId = useId();
 
   useEffect(() => {
     const updatePosition = () => {
@@ -132,19 +136,78 @@ export const SelectMulti = ({
     onChange?.(newValue);
   };
 
-  const handleRemove = (optionValue: string, e: React.MouseEvent) => {
+  const handleRemove = (optionValue: string, e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation();
     const newValue = value.filter((v) => v !== optionValue);
     onChange?.(newValue);
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        setSearchTerm('');
+        inputRef.current?.focus();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = focusedIndex < filteredOptions.length - 1 ? focusedIndex + 1 : 0;
+        setFocusedIndex(nextIndex);
+        optionRefs.current[nextIndex]?.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = focusedIndex > 0 ? focusedIndex - 1 : filteredOptions.length - 1;
+        setFocusedIndex(prevIndex);
+        optionRefs.current[prevIndex]?.focus();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        setFocusedIndex(0);
+        optionRefs.current[0]?.focus();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        const lastIndex = filteredOptions.length - 1;
+        setFocusedIndex(lastIndex);
+        optionRefs.current[lastIndex]?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, focusedIndex, filteredOptions.length]);
+
+  // Reset focused index when options change
+  useEffect(() => {
+    setFocusedIndex(-1);
+  }, [filteredOptions.length, searchTerm]);
+
   return (
     <div ref={containerRef} className={cn('relative w-full', className)} {...props}>
       <div
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls={listboxId}
+        aria-label={placeholder}
         className={cn(selectVariants({ variant, size }), 'cursor-text')}
         onClick={() => {
           inputRef.current?.focus();
           setIsOpen(true);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsOpen(true);
+            inputRef.current?.focus();
+          } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setIsOpen(true);
+            setTimeout(() => {
+              optionRefs.current[0]?.focus();
+              setFocusedIndex(0);
+            }, 0);
+          }
         }}
       >
         <div className="flex flex-1 flex-wrap items-center gap-1 px-2 py-1.5">
@@ -173,11 +236,21 @@ export const SelectMulti = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setIsOpen(true)}
+            aria-autocomplete="list"
+            aria-controls={isOpen ? listboxId : undefined}
+            aria-activedescendant={
+              isOpen && focusedIndex >= 0
+                ? `${listboxId}-option-${focusedIndex}`
+                : undefined
+            }
             className="flex-1 min-w-[120px] border-0 bg-transparent p-0 outline-none focus:ring-0 placeholder:text-slate-400 text-sm"
             placeholder={selectedOptions.length === 0 ? placeholder : ''}
             onKeyDown={(e) => {
               if (e.key === 'Backspace' && searchTerm === '' && selectedOptions.length > 0) {
-                handleRemove(selectedOptions[selectedOptions.length - 1].value, e as any);
+                handleRemove(selectedOptions[selectedOptions.length - 1].value, e);
+              } else if (e.key === 'ArrowDown' && !isOpen) {
+                e.preventDefault();
+                setIsOpen(true);
               }
             }}
           />
@@ -198,6 +271,10 @@ export const SelectMulti = ({
         position.width > 0 &&
         createPortal(
           <div
+            ref={listboxRef}
+            id={listboxId}
+            role="listbox"
+            aria-label="Options"
             data-select-dropdown
             className="fixed z-[9999] max-h-60 mt-1 overflow-auto rounded-md border border-slate-200 bg-white shadow-lg"
             style={{
@@ -207,19 +284,32 @@ export const SelectMulti = ({
             }}
           >
             {filteredOptions.length > 0 ? (
-              filteredOptions.map((option) => {
+              filteredOptions.map((option, index) => {
                 const isSelected = value.includes(option.value);
                 return (
                   <button
                     key={option.value}
+                    ref={(el) => {
+                      optionRefs.current[index] = el;
+                    }}
+                    id={`${listboxId}-option-${index}`}
+                    role="option"
+                    aria-selected={isSelected}
                     type="button"
                     onClick={() => {
                       handleToggle(option.value);
                       setSearchTerm('');
                     }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleToggle(option.value);
+                        setSearchTerm('');
+                      }
+                    }}
                     disabled={option.disabled}
                     className={cn(
-                      'w-full px-3 py-2 text-left text-sm transition-colors flex items-center justify-between',
+                      'w-full px-3 py-2 text-left text-sm transition-colors flex items-center justify-between focus:outline-none focus:bg-slate-100',
                       isSelected
                         ? 'bg-primary-50 text-primary-700'
                         : 'hover:bg-slate-50 text-slate-900',
@@ -228,13 +318,13 @@ export const SelectMulti = ({
                   >
                     <span>{option.label}</span>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-primary-600 flex-shrink-0" />
+                      <Check className="h-4 w-4 text-primary-600 flex-shrink-0" aria-hidden="true" />
                     )}
                   </button>
                 );
               })
             ) : (
-              <div className="px-3 py-2 text-sm text-slate-500">
+              <div role="status" className="px-3 py-2 text-sm text-slate-500">
                 No options found
               </div>
             )}

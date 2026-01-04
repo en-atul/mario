@@ -32,8 +32,14 @@ export const Toast = ({
     warning: 'bg-warning-50 border-warning-200 text-warning-900',
   };
 
+  const role = variant === 'error' ? 'alert' : 'status';
+  const ariaLive = variant === 'error' ? 'assertive' : 'polite';
+
   return (
     <div
+      role={role}
+      aria-live={ariaLive}
+      aria-atomic="true"
       className={cn(
         'pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg border shadow-lg',
         variantClasses[variant],
