@@ -1,5 +1,6 @@
 import { Meta, Title } from "@storybook/addon-docs/blocks";
 import { duration, easing, animation, transition } from "./tokens/motion";
+import React from "react";
 
 <Meta title="Tokens/Motion" />
 
@@ -11,14 +12,34 @@ Motion tokens define the timing, easing, and animation presets used throughout t
 
 Duration tokens define how long animations take to complete.
 
-| Token | Value | Use Case |
-|-------|-------|----------|
-| `instant` | 0s | Immediate state changes |
-| `fast` | 0.1s | Quick micro-interactions |
-| `base` | 0.2s | Standard animations (default) |
-| `slow` | 0.3s | Deliberate transitions |
-| `slower` | 0.5s | Complex animations |
-| `slowest` | 0.8s | Extended transitions |
+<table>
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Value</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(duration).map(([token, value]) => {
+      const useCases = {
+        instant: 'Immediate state changes',
+        fast: 'Quick micro-interactions',
+        base: 'Standard animations (default)',
+        slow: 'Deliberate transitions',
+        slower: 'Complex animations',
+        slowest: 'Extended transitions',
+      };
+      return (
+        <tr key={token}>
+          <td><code>{token}</code></td>
+          <td><code>{value}s</code></td>
+          <td>{useCases[token] || ''}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
 
 ```tsx
 import { duration } from './tokens/motion';
@@ -33,16 +54,36 @@ import { duration } from './tokens/motion';
 
 Easing functions control the acceleration and deceleration of animations.
 
-| Token | Cubic Bezier | Use Case |
-|-------|--------------|----------|
-| `linear` | `[0, 0, 1, 1]` | Constant speed |
-| `easeIn` | `[0.4, 0, 1, 1]` | Accelerating |
-| `easeOut` | `[0, 0, 0.2, 1]` | Decelerating (recommended) |
-| `easeInOut` | `[0.4, 0, 0.2, 1]` | Accelerate then decelerate |
-| `standard` | `[0.4, 0, 0.2, 1]` | Material Design standard |
-| `decelerate` | `[0, 0, 0.2, 1]` | Smooth deceleration |
-| `accelerate` | `[0.4, 0, 1, 1]` | Quick acceleration |
-| `spring` | `[0.68, -0.55, 0.265, 1.55]` | Spring-like bounce |
+<table>
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Cubic Bezier</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(easing).map(([token, values]) => {
+      const useCases = {
+        linear: 'Constant speed',
+        easeIn: 'Accelerating',
+        easeOut: 'Decelerating (recommended)',
+        easeInOut: 'Accelerate then decelerate',
+        standard: 'Material Design standard',
+        decelerate: 'Smooth deceleration',
+        accelerate: 'Quick acceleration',
+        spring: 'Spring-like bounce',
+      };
+      return (
+        <tr key={token}>
+          <td><code>{token}</code></td>
+          <td><code>[{values.join(', ')}]</code></td>
+          <td>{useCases[token] || ''}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
 
 ```tsx
 import { easing } from './tokens/motion';
@@ -96,15 +137,41 @@ import { motion } from 'framer-motion';
 
 Pre-configured transition settings for consistent timing.
 
-| Preset | Duration | Easing | Use Case |
-|--------|----------|--------|----------|
-| `default` | 0.2s | easeOut | Standard transitions |
-| `fast` | 0.1s | easeOut | Quick interactions |
-| `slow` | 0.3s | easeOut | Deliberate animations |
-| `modal` | 0.2s | easeOut | Modal/Dialog animations |
-| `overlay` | 0.2s | easeInOut | Backdrop overlays |
-| `spring` | - | spring | Spring physics |
-| `springGentle` | - | spring | Gentle spring |
+<table>
+  <thead>
+    <tr>
+      <th>Preset</th>
+      <th>Duration</th>
+      <th>Easing</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Object.entries(transition).map(([preset, config]) => {
+      const useCases = {
+        default: 'Standard transitions',
+        fast: 'Quick interactions',
+        slow: 'Deliberate animations',
+        modal: 'Modal/Dialog animations',
+        overlay: 'Backdrop overlays',
+        spring: 'Spring physics',
+        springGentle: 'Gentle spring',
+      };
+      const durationValue = config.duration ? `${config.duration}s` : '-';
+      const easingValue = config.ease 
+        ? (Array.isArray(config.ease) ? `[${config.ease.join(', ')}]` : config.ease)
+        : (config.type === 'spring' ? 'spring' : '-');
+      return (
+        <tr key={preset}>
+          <td><code>{preset}</code></td>
+          <td><code>{durationValue}</code></td>
+          <td><code>{easingValue}</code></td>
+          <td>{useCases[preset] || ''}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
 
 ```tsx
 import { transition } from './tokens/motion';

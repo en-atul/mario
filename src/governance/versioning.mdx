@@ -150,7 +150,7 @@ Version numbers follow the format: `MAJOR.MINOR.PATCH` (e.g., `1.2.3`)
 
 ### Structure
 
-```markdown
+```text
 ## [Version] - YYYY-MM-DD
 
 ### Breaking Changes
@@ -173,18 +173,18 @@ Version numbers follow the format: `MAJOR.MINOR.PATCH` (e.g., `1.2.3`)
 
 ### Example
 
-```markdown
+```text
 ## [2.0.0] - 2024-01-15
 
 ### Breaking Changes
-- **Button API**: `variant` prop now uses `primary` instead of `default`
-  - Migration: Replace `variant="default"` with `variant="primary"`
-- **Removed**: `OldModal` component (use `Modal` instead)
+- **Button API**: variant prop now uses primary instead of default
+  - Migration: Replace variant="default" with variant="primary"
+- **Removed**: OldModal component (use Modal instead)
 
 ### Added
-- New `Card` component
-- New `outline` variant for Button
-- New spacing token `14`
+- New Card component
+- New outline variant for Button
+- New spacing token 14
 
 ### Changed
 - Improved Modal focus trap behavior
@@ -195,7 +195,7 @@ Version numbers follow the format: `MAJOR.MINOR.PATCH` (e.g., `1.2.3`)
 - Resolved Dropdown z-index issues
 
 ### Deprecated
-- `OldComponent` will be removed in v3.0.0
+- OldComponent will be removed in v3.0.0
 ```
 
 ## Migration Guides
@@ -217,7 +217,7 @@ Version numbers follow the format: `MAJOR.MINOR.PATCH` (e.g., `1.2.3`)
 
 ### Example Migration Guide
 
-```markdown
+```text
 # Migrating from v1.x to v2.x
 
 ## Overview
@@ -227,25 +227,21 @@ Version 2.0 introduces a new Button API to improve consistency.
 
 ### Button Variant Prop
 **Before:**
-```tsx
-<Button variant="default">Click me</Button>
-```
+`<Button variant="default">Click me</Button>`
 
 **After:**
-```tsx
-<Button variant="primary">Click me</Button>
-```
+`<Button variant="primary">Click me</Button>`
 
 ## Migration Steps
 
-1. Find all `Button` components with `variant="default"`
-2. Replace with `variant="primary"`
+1. Find all Button components with variant="default"
+2. Replace with variant="primary
 3. Test all button interactions
 4. Update any related tests
 
 ## Timeline
-- v1.5.0: `variant="default"` deprecated
-- v2.0.0: `variant="default"` removed
+- v1.5.0: variant="default" deprecated
+- v2.0.0: variant="default" removed
 ```
 
 ## Version Support
