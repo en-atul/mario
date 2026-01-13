@@ -1,5 +1,6 @@
 import { Meta, Title } from "@storybook/addon-docs/blocks";
 import { radius } from "./tokens/radius";
+import React from "react";
 
 <Meta title="Tokens/Radius" />
 
@@ -7,16 +8,17 @@ import { radius } from "./tokens/radius";
 
 Border radius tokens define the roundedness of corners for UI elements.
 
-<div className="space-y-4">
+<div className="grid grid-cols-[8rem_10rem_5rem] gap-x-4 gap-y-2 items-center">
   {Object.entries(radius).map(([name, value]) => (
-    <div key={name} className="flex items-center gap-4">
-      <div className="w-32 text-sm font-medium">{name}</div>
-      <div className="text-sm text-slate-600 font-mono">{value}</div>
+    <React.Fragment key={name}>
+      <div className="text-sm font-medium">{name}</div>
+      <div className="text-sm font-mono text-slate-600">{value}</div>
       <div
-        className="w-20 h-20 bg-primary-500"
+        className="w-20 h-20 bg-primary"
         style={{ borderRadius: value }}
       />
-    </div>
+    </React.Fragment>
   ))}
 </div>
+
 
