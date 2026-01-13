@@ -3,4 +3,7 @@ import customTheme from "./theme";
 
 addons.setConfig({
   theme: customTheme,
+  // sidebar:{
+  //   showRoots: false
+  // }
 });

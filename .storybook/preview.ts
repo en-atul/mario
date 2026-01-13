@@ -20,7 +20,7 @@ const preview: Preview = {
         },
         {
           name: "dark",
-          value: "#0f172a",
+          value: "#1b1c1d",
         },
         {
           name: "gray",
@@ -96,17 +96,17 @@ const preview: Preview = {
         ],
       },
     },
-    decorators: [
-      withThemeByDataAttribute({
-        defaultTheme: "light",
-        themes: {
-          light: "light",
-          dark: "dark",
-        },
-        attributeName: "data-mode",
-      }),
-    ],
   },
+  decorators: [
+    withThemeByDataAttribute({
+      defaultTheme: "light",
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      attributeName: "data-mode",
+    }),
+  ],
 };
 
 export default preview;
