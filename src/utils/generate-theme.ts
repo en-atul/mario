@@ -1,7 +1,7 @@
 import {
   colors,
   white,
-  black, 
+  black,
   transparent,
   currentColor,
 } from "../tokens/colors.ts";

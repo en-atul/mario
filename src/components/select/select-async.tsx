@@ -66,7 +66,7 @@ export const SelectAsync = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const searchTimeoutRef = useRef<NodeJS.Timeout>(null);
 
   const fetchOptions = useCallback(
     async (search: string, pageNum: number, append = false) => {
@@ -224,7 +224,7 @@ export const SelectAsync = ({
   };
 
   const displayValue = isMulti
-    ? selectedOptions
+    ? undefined
     : options.find((opt) => value.includes(opt.value));
 
   return (

@@ -1,0 +1,46 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import InputV2Stories from "./input-v2.stories";
+
+<Title>Input V2 (Web Component)</Title>
+
+<Meta of={InputV2Stories} />
+
+Input V2 is a web component with a shadow DOM for encapsulated styles and DOM structure.
+It supports currency formatting, validation states, and multiple sizes.
+
+## Usage
+
+Import the definition once, then use the custom element anywhere:
+
+```ts
+import { defineInputV2 } from './input-v2';
+
+defineInputV2();
+```
+
+```html
+<mario-input-v2 placeholder="Email" type="email"></mario-input-v2>
+```
+
+<Primary />
+
+<Controls />
+
+## Currency Input
+
+Enable currency formatting by setting `currency={true}`. The input will automatically format numbers with two decimal places and display a currency symbol.
+
+## Variants
+
+- **default**: Standard input styling
+- **error**: Red border and focus ring for validation errors
+
+## Sizes
+
+Available sizes: `sm`, `md`, `lg`
+
+## Accessibility
+
+Always pair inputs with labels. Use the `error` variant to indicate validation failures.
+
+<Stories />
