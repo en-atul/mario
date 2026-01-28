@@ -4,7 +4,7 @@ import { Button } from '../button';
 import { ToastProvider, useToast } from './toast-provider';
 
 const meta = {
-  title: 'Components/Feedback/Toast',
+  title: 'Primitives (React)/Feedback/Toast',
   component: Toast,
   parameters: {
     layout: 'centered',

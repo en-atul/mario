@@ -4,7 +4,7 @@ import { Switch } from './switch';
 import { Label } from '../label';
 
 const meta = {
-  title: 'Components/Forms/Switch',
+  title: 'Primitives (React)/Forms/Switch',
   component: Switch,
   parameters: {
     layout: 'centered',

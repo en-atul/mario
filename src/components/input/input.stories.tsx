@@ -3,7 +3,7 @@ import { Input } from './input';
 import { Label } from '../label';
 
 const meta = {
-  title: 'Components/Forms/Input',
+  title: 'Primitives (React)/Forms/Input',
   component: Input,
   args: {
     placeholder: 'Enter text...',

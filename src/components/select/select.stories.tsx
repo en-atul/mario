@@ -5,7 +5,7 @@ import { SelectMulti } from './select-multi';
 import { Label } from '../label';
 
 const meta = {
-  title: 'Components/Forms/Select',
+  title: 'Primitives (React)/Forms/Select',
   component: Select,
   argTypes: {
     variant: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from './skeleton';
 
 const meta = {
-  title: 'Components/Feedback/Skeleton',
+  title: 'Primitives (React)/Feedback/Skeleton',
   component: Skeleton,
   parameters: {
     layout: 'centered',
