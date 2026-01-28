@@ -1,0 +1,23 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import SeparatorStories from "./separator.stories";
+
+<Title>Separator</Title>
+
+<Meta of={SeparatorStories} />
+
+Separators visually divide content into distinct sections. They can be displayed horizontally or vertically.
+
+<Primary />
+
+<Controls />
+
+## Orientation
+
+- **horizontal**: Default, creates a horizontal line
+- **vertical**: Creates a vertical divider
+
+## Accessibility
+
+By default, separators are decorative (`decorative={true}`). Set `decorative={false}` for semantic separators that should be announced by screen readers.
+
+<Stories />

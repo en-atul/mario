@@ -134,7 +134,7 @@ Storybook includes:
 mario/
 ├── .storybook/          # Storybook configuration
 ├── src/
-│   ├── components/      # React components
+│   ├── react/components/      # React components
 │   │   ├── badge/
 │   │   ├── button/
 │   │   ├── input/

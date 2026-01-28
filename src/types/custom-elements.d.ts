@@ -104,25 +104,6 @@ declare module 'react' {
           | 'code'
           | 'pre';
       };
-      'mario-input-v2': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      > & {
-        value?: string;
-        placeholder?: string;
-        type?: string;
-        name?: string;
-        id?: string;
-        disabled?: boolean;
-        readonly?: boolean;
-        readOnly?: boolean;
-        required?: boolean;
-        size?: 'sm' | 'md' | 'lg';
-        variant?: 'default' | 'error';
-        currency?: boolean;
-        currencySymbol?: string;
-        'currency-symbol'?: string;
-      };
     }
   }
 }
@@ -142,7 +123,6 @@ declare global {
     'ds-switch': HTMLElement;
     'ds-toast': HTMLElement;
     'ds-typography': HTMLElement;
-    'mario-input-v2': HTMLElement;
   }
 }
 

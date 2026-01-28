@@ -1,0 +1,24 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import SwitchStories from "./switch.stories";
+
+<Title>Switch</Title>
+
+<Meta of={SwitchStories} />
+
+Switches are toggle controls that allow users to turn settings on or off. They provide immediate visual feedback for binary choices.
+
+<Primary />
+
+<Controls />
+
+## Usage
+
+Use switches for settings that take effect immediately, such as notifications or feature toggles. For form submissions, consider using checkboxes instead.
+
+## States
+
+- **checked**: Toggle is on
+- **unchecked**: Toggle is off
+- **disabled**: Non-interactive state
+
+<Stories />

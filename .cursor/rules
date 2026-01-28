@@ -51,7 +51,7 @@ Every component follows this structure:
 - All components must have comprehensive stories
 
 ## File Organization
-- `src/components/` - All React components
+- `src/react/components/` - All React components
 - `src/tokens/` - Design token definitions
 - `src/utils/` - Shared utility functions
 - `src/styles/` - Global styles and CSS

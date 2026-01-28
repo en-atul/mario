@@ -1,0 +1,38 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import SelectStories from "./select.stories";
+import { Select } from "./select";
+import { SelectMulti } from "./select-multi";
+
+<Title>Select</Title>
+
+<Meta of={SelectStories} />
+
+Select components allow users to choose from a list of options. Use `Select` for single selection and `SelectMulti` for multiple selections with a modern tag-based interface.
+
+<Primary />
+
+<Controls />
+
+## Variants
+
+- **default**: Standard select styling
+- **error**: Red border and focus ring for validation errors
+
+## Sizes
+
+Available sizes: `sm`, `md`, `lg`
+
+## Single vs Multiple Selection
+
+- **Select**: Native HTML select for single selection
+- **SelectMulti**: Custom component similar to react-select with:
+  - Tag-based display of selected items
+  - Search/filter functionality
+  - Individual item removal
+  - Dropdown interface
+
+## Accessibility
+
+Always pair selects with labels. Use the `error` variant to indicate validation failures. Include a placeholder option for better UX.
+
+<Stories />

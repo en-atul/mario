@@ -1,0 +1,47 @@
+import { Meta, Title, Primary, Stories, Controls } from "@storybook/addon-docs/blocks";
+import TextAreaStories from "./textarea.stories";
+import { TextArea } from "./textarea";
+
+<Title>TextArea</Title>
+
+<Meta of={TextAreaStories} />
+
+TextArea component provides a multi-line text input field with built-in validation, character counting, and accessibility features.
+
+<Primary />
+
+<Controls />
+
+## Features
+
+- **Label support**: Required label prop for accessibility
+- **Character counting**: Optional `maxLength` prop with visual counter
+- **Validation**: Automatic validation when content exceeds `maxLength`
+- **Required indicator**: Visual indicator (red dot) when `required` is true
+- **Error states**: Visual feedback when content is too long
+- **Disabled state**: Non-interactive state for read-only scenarios
+
+## Props
+
+- **label** (required): Label text displayed above the textarea
+- **required**: Marks the field as required with a visual indicator
+- **maxLength**: Maximum character limit with counter display
+- **disabled**: Disables user interaction
+- **placeholder**: Placeholder text shown when empty
+
+## Validation
+
+When `maxLength` is provided:
+- Character count is displayed in the format: `current/max`
+- Text turns red when limit is exceeded
+- `aria-invalid` attribute is set for screen readers
+- Visual ring changes to danger color
+
+## Accessibility
+
+- Properly associated label using semantic HTML
+- ARIA attributes for validation states
+- Keyboard navigation support
+- Screen reader friendly
+
+<Stories />
